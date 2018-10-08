@@ -15,13 +15,13 @@ class MainRecyclerViewAdapter(val demos: ArrayList<Demo>) : RecyclerView.Adapter
 
         init {
             itemView.setOnClickListener {
-                clickListener.onItemClicked(it, adapterPosition)
+                clickListener.onItemClicked(this, adapterPosition)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClicked(view: View, position: Int)
+        fun onItemClicked(viewHolder: ViewHolder, position: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
