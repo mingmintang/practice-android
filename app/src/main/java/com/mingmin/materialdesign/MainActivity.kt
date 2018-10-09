@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.mingmin.materialdesign.bottomsheet.BottomSheetActivity
+import com.mingmin.materialdesign.transparenttoolbar.TransparentToolbarActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.OnItemClickListener {
@@ -22,6 +24,7 @@ class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.OnItemClickLis
 
         main_recyclerView.setHasFixedSize(true)
         main_recyclerView.layoutManager = LinearLayoutManager(this)
+        main_recyclerView.itemAnimator = DefaultItemAnimator()
         main_recyclerView.adapter = adapter
     }
 
@@ -29,6 +32,7 @@ class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.OnItemClickLis
         val intent: Intent?
         when(position) {
             0 -> intent = Intent(this, BottomSheetActivity::class.java)
+            1 -> intent = Intent(this, TransparentToolbarActivity::class.java)
             else -> intent = null
         }
         intent?.let {

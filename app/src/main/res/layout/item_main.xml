@@ -12,17 +12,18 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/main_item_title"
-            android:transitionName="@string/transitionName_demoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="Demo Title"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+            android:transitionName="@string/transitionName_demoTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

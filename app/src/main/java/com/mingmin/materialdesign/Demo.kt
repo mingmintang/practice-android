@@ -24,6 +24,11 @@ private val demoJson = """
             "id": 0,
             "title": "Bottom Sheet",
             "desc": "Bottom sheet state switch, FAB animation, Text Drawable"
+        },
+        {
+            "id": 1,
+            "title": "Transparent Toolbar",
+            "desc": "Overlay transparent toolbar and statusbar"
         }
     ]
 """

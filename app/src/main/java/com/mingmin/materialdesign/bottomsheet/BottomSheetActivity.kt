@@ -55,8 +55,8 @@ class BottomSheetActivity : AppCompatActivity(), BottomSheetAdapter.ItemClickLis
     }
 
     fun initAnimation() {
-        fabGrowAnim = AnimationUtils.loadAnimation(this, R.anim.simple_grow)
-        fabShrinkAnim = AnimationUtils.loadAnimation(this, R.anim.simple_shrink)
+        fabGrowAnim = AnimationUtils.loadAnimation(this, R.anim.fab_grow)
+        fabShrinkAnim = AnimationUtils.loadAnimation(this, R.anim.fab_shrink)
             fabShrinkAnim.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
 
