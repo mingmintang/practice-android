@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ratingbar_bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="300dp"
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <android.support.design.chip.ChipGroup
+        android:id="@+id/ratingbar_chipGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        app:chipSpacing="16dp"
+        app:singleSelection="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip1_1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip1_2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="2" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip1_3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="6" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip1_4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="18"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5" />
+
+    </android.support.design.chip.ChipGroup>
+
+    <android.support.design.chip.ChipGroup
+        android:id="@+id/ratingbar_chipGroup2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:chipSpacing="16dp"
+        app:singleSelection="true"
+        app:layout_constraintStart_toStartOf="@+id/ratingbar_chipGroup1"
+        app:layout_constraintTop_toBottomOf="@+id/ratingbar_chipGroup1">
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip2_1"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="0" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip2_2"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="5" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip2_3"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="10" />
+
+        <android.support.design.chip.Chip
+            android:id="@+id/ratingbar_chip2_4"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:text="20" />
+
+    </android.support.design.chip.ChipGroup>
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/ratingbar_bs_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="SAVE"
+        android:onClick="bottomSheetSave"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingbar_chipGroup2" />
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/ratingbar_bs_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_marginEnd="16dp"
+        android:text="CANCEL"
+        android:onClick="bottomSheetCancel"
+        app:layout_constraintEnd_toStartOf="@+id/ratingbar_bs_save"
+        app:layout_constraintTop_toTopOf="@+id/ratingbar_bs_save" />
+
+</android.support.constraint.ConstraintLayout>

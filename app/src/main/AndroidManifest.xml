@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".bottomsheet.BottomSheetActivity" />
-        <activity android:name=".transparenttoolbar.TransparentToolbarActivity"></activity>
+        <activity android:name=".transparenttoolbar.TransparentToolbarActivity" />
+        <activity android:name=".ratingbar.RatingBarActivity"></activity>
     </application>
 
 </manifest>

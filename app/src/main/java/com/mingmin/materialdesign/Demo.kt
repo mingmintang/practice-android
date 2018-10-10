@@ -29,6 +29,11 @@ private val demoJson = """
             "id": 1,
             "title": "Transparent Toolbar",
             "desc": "Overlay transparent toolbar and statusbar"
+        },
+        {
+            "id": 2,
+            "title": "Rating Bar",
+            "desc": "Custom Rating Bar icon, Chip single choice"
         }
     ]
 """
