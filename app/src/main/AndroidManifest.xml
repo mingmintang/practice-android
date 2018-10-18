@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mingmin.materialdesign">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +20,10 @@
         </activity>
         <activity android:name=".bottomsheet.BottomSheetActivity" />
         <activity android:name=".transparenttoolbar.TransparentToolbarActivity" />
-        <activity android:name=".ratingbar.RatingBarActivity"></activity>
+        <activity android:name=".ratingbar.RatingBarActivity" />
+        <activity android:name=".firestore.FirestoreActivity" />
+        <activity android:name=".mvvm.MvvmActivity" />
+        <activity android:name=".firestore.FirestoreDetailActivity"></activity>
     </application>
 
 </manifest>

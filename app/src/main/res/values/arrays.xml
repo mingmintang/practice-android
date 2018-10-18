@@ -1,4 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="catelogies">
+        <item>所有種類</item>
+        <item>早餐</item>
+        <item>速食</item>
+        <item>咖啡</item>
+        <item>台式</item>
+        <item>日式</item>
+        <item>韓式</item>
+        <item>義式</item>
+        <item>泰式</item>
+        <item>越南菜</item>
+        <item>披薩</item>
+        <item>小吃</item>
+        <item>甜點</item>
+    </string-array>
+
+    <string-array name="cities">
+        <item>所有縣市</item>
+        <item>基隆市</item>
+        <item>台北市</item>
+        <item>新北市</item>
+        <item>桃園縣</item>
+        <item>新竹市</item>
+        <item>新竹縣</item>
+        <item>苗栗縣</item>
+        <item>台中市</item>
+        <item>彰化縣</item>
+        <item>南投縣</item>
+        <item>雲林縣</item>
+        <item>嘉義市</item>
+        <item>嘉義縣</item>
+        <item>台南市</item>
+        <item>高雄市</item>
+        <item>屏東縣</item>
+        <item>台東縣</item>
+        <item>花蓮縣</item>
+        <item>宜蘭縣</item>
+        <item>澎湖縣</item>
+        <item>金門縣</item>
+        <item>連江縣</item>
+    </string-array>
+
+    <string-array name="prices">
+        <item>所有價位</item>
+        <item>$</item>
+        <item>$$</item>
+        <item>$$$</item>
+    </string-array>
+
+    <string-array name="sort_by">
+        <item>排序: 評分</item>
+        <item>排序: 評價數</item>
+        <item>排序: 價位</item>
+    </string-array>
+
 </resources>

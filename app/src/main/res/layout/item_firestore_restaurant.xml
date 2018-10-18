@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/firestore_restaurant_image"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorItemBackground"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_fastfood_white_24dp" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_name"
+        style="@style/AppTheme.Subheader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        app:layout_constraintBottom_toTopOf="@+id/firestore_restaurant_rating"
+        app:layout_constraintStart_toStartOf="@+id/firestore_restaurant_rating"
+        tools:text="鼎泰豐" />
+
+    <me.zhanghai.android.materialratingbar.MaterialRatingBar
+        android:id="@+id/firestore_restaurant_rating"
+        style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/firestore_restaurant_category"
+        app:layout_constraintStart_toStartOf="@+id/firestore_restaurant_category" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_rating_num"
+        style="@style/AppTheme.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/greyDisabled"
+        app:layout_constraintBottom_toBottomOf="@+id/firestore_restaurant_rating"
+        app:layout_constraintStart_toEndOf="@+id/firestore_restaurant_rating"
+        tools:text="(10)" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_category"
+        style="@style/AppTheme.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/greySecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/firestore_restaurant_image"
+        app:layout_constraintStart_toEndOf="@+id/firestore_restaurant_image"
+        tools:text="義式" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_divider"
+        style="@style/AppTheme.TextDivider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="@string/divider_bullet"
+        android:textColor="@color/greySecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/firestore_restaurant_category"
+        app:layout_constraintStart_toEndOf="@+id/firestore_restaurant_category" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_city"
+        style="@style/AppTheme.Body1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:textColor="@color/greySecondary"
+        app:layout_constraintBottom_toBottomOf="@+id/firestore_restaurant_divider"
+        app:layout_constraintStart_toEndOf="@+id/firestore_restaurant_divider"
+        tools:text="台北" />
+
+    <TextView
+        android:id="@+id/firestore_restaurant_price"
+        style="@style/AppTheme.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/greySecondary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="$$$" />
+
+</android.support.constraint.ConstraintLayout>

@@ -34,6 +34,11 @@ private val demoJson = """
             "id": 2,
             "title": "Rating Bar",
             "desc": "Custom Rating Bar icon, Chip single choice"
+        },
+        {
+            "id": 3,
+            "title": "Firestore",
+            "desc": ""
         }
     ]
 """
