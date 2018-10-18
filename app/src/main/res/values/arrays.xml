@@ -1,6 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="restaurant_first_names">
+        <item>棗莊古藝</item>
+        <item>金榜</item>
+        <item>江技舊記</item>
+        <item>賴新魁</item>
+        <item>垂坤</item>
+        <item>小蒙牛</item>
+        <item>綠葉</item>
+        <item>維多利亞</item>
+        <item>范頭</item>
+        <item>魔法</item>
+        <item>費莉絲</item>
+        <item>山吻泉</item>
+        <item>阿水</item>
+        <item>紅棗</item>
+        <item>繽紛</item>
+        <item>六角</item>
+        <item>胡家</item>
+        <item>石蓮</item>
+    </string-array>
+
+    <string-array name="restaurant_last_names">
+        <item>膳坊</item>
+        <item>軒</item>
+        <item>牧場</item>
+        <item>庭園</item>
+        <item>客棧</item>
+        <item>森林</item>
+        <item>方舟</item>
+        <item>小屋</item>
+        <item>餐廳</item>
+        <item>小館</item>
+        <item>樓</item>
+        <item>幸福廚房</item>
+        <item>飯店</item>
+        <item>食府</item>
+        <item>料理</item>
+        <item>工房</item>
+        <item>院</item>
+        <item>園</item>
+    </string-array>
+
     <string-array name="catelogies">
         <item>所有種類</item>
         <item>早餐</item>

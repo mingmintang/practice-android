@@ -1,9 +1,13 @@
 package com.mingmin.materialdesign.firestore
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import com.firebase.ui.auth.AuthUI
 import com.google.firebase.auth.FirebaseAuth
 import com.mingmin.materialdesign.BuildConfig
@@ -24,6 +28,7 @@ class FirestoreActivity : AppCompatActivity() {
 
         if (!hasSignIn()) {
             startSignIn()
+            return
         }
     }
 
@@ -46,6 +51,17 @@ class FirestoreActivity : AppCompatActivity() {
         super.onStop()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            RC_SIGN_IN -> {
+                if (resultCode != Activity.RESULT_OK && !hasSignIn()) {
+                    startSignIn()
+                }
+            }
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_firestore, menu)
         return super.onCreateOptionsMenu(menu)
@@ -59,12 +75,35 @@ class FirestoreActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun addItems() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun addItems() {
+        showLoading()
+        Cloud.addRandomRestaurants(this, 10).addOnCompleteListener {
+            if (it.isSuccessful) {
+                Snackbar.make(firestore_restaurants, "已新增10個隨機餐廳", Snackbar.LENGTH_SHORT)
+                        .show()
+            } else {
+                Snackbar.make(firestore_restaurants, "新增隨機餐廳失敗", Snackbar.LENGTH_SHORT)
+                        .show()
+            }
+            showList()
+        }
     }
 
-    private fun signOut() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun signOut() {
+        showLoading()
+        AuthUI.getInstance().signOut(this).addOnCompleteListener {
+            startSignIn()
+        }
+    }
+
+    fun showLoading() {
+        firestore_restaurants.visibility = View.GONE
+        firestore_loading.visibility = View.VISIBLE
+    }
+
+    fun showList() {
+        firestore_restaurants.visibility = View.VISIBLE
+        firestore_loading.visibility = View.GONE
     }
 
     companion object {
