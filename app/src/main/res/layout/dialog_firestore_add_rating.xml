@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/firestore_review_title"
+        android:id="@+id/firestore_add_rating_title"
         style="@style/AppTheme.Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <me.zhanghai.android.materialratingbar.MaterialRatingBar
-        android:id="@+id/firestore_review_rating"
+        android:id="@+id/firestore_add_rating_rating"
         style="@style/Widget.MaterialRatingBar.RatingBar"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
@@ -27,10 +27,10 @@
         android:layout_marginEnd="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firestore_review_title" />
+        app:layout_constraintTop_toBottomOf="@+id/firestore_add_rating_title" />
 
     <EditText
-        android:id="@+id/firestore_review_comment"
+        android:id="@+id/firestore_add_rating_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="分享你精彩的心得吧"
@@ -39,23 +39,23 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firestore_review_rating" />
+        app:layout_constraintTop_toBottomOf="@+id/firestore_add_rating_rating" />
 
     <android.support.design.button.MaterialButton
-        android:id="@+id/firestore_review_submit"
+        android:id="@+id/firestore_add_rating_submit"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firestore_review_comment" />
+        app:layout_constraintTop_toBottomOf="@+id/firestore_add_rating_comment" />
 
     <android.support.design.button.MaterialButton
-        android:id="@+id/firestore_review_cancel"
+        android:id="@+id/firestore_add_rating_cancel"
         style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
         android:layout_marginEnd="16dp"
         android:text="@string/cancel"
         android:textColor="@color/greyPrimary"
-        app:layout_constraintEnd_toStartOf="@+id/firestore_review_submit"
-        app:layout_constraintTop_toTopOf="@+id/firestore_review_submit" />
+        app:layout_constraintEnd_toStartOf="@+id/firestore_add_rating_submit"
+        app:layout_constraintTop_toTopOf="@+id/firestore_add_rating_submit" />
 
 </android.support.constraint.ConstraintLayout>

@@ -10,15 +10,19 @@ object Firestore {
         FirebaseFirestore.getInstance()
     }
 
+    fun getWriteBatch(): WriteBatch {
+        return fdb.batch()
+    }
+
     fun getRestaurantCollection(): CollectionReference {
         return fdb.collection("restaurant")
     }
 
-    fun getRestaurantDocument(id: String): DocumentReference {
-        return getRestaurantCollection().document(id)
+    fun getRestaurantDocument(restaurantId: String): DocumentReference {
+        return getRestaurantCollection().document(restaurantId)
     }
 
-    fun getWriteBatch(): WriteBatch {
-        return fdb.batch()
+    fun getRestaurantRatingCollection(restaurantId: String): CollectionReference {
+        return getRestaurantDocument(restaurantId).collection("rating")
     }
 }

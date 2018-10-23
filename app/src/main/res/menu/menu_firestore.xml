@@ -2,9 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_add_items"
+        android:title="加入20筆內容" />
+    <item
+        android:id="@+id/menu_clear_items"
+        android:title="清空20筆內容" />
+    <item
         android:id="@+id/menu_sign_out"
         android:title="@string/sign_out" />
-    <item
-        android:id="@+id/menu_add_items"
-        android:title="加入隨機內容" />
 </menu>

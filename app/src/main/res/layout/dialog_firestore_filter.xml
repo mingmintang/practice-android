@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:entries="@array/prices"
+        android:entries="@array/price_levels"
         app:layout_constraintBottom_toBottomOf="@+id/firestore_price_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/firestore_price_icon"

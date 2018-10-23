@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/firestore_rating_name"
-        style="@style/AppTheme.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ellipsize="end"
-        android:maxWidth="120dp"
-        android:maxLines="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Mingmin" />
+    <data>
 
-    <TextView
-        android:id="@+id/firestore_rating_text_divider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/divider_bullet"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_name"
-        app:layout_constraintStart_toEndOf="@+id/firestore_rating_name"
-        app:layout_constraintTop_toTopOf="@+id/firestore_rating_name" />
+    </data>
 
-    <TextView
-        android:id="@+id/firestore_rating_date"
-        style="@style/AppTheme.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textColor="@color/greySecondary"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_text_divider"
-        app:layout_constraintStart_toEndOf="@+id/firestore_rating_text_divider"
-        app:layout_constraintTop_toTopOf="@+id/firestore_rating_text_divider"
-        tools:text="17/10/2018" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <me.zhanghai.android.materialratingbar.MaterialRatingBar
-        android:id="@+id/firestore_rating_rating"
-        style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firestore_rating_date" />
+        <TextView
+            android:id="@+id/firestore_rating_name"
+            style="@style/AppTheme.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:maxWidth="120dp"
+            android:maxLines="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Mingmin" />
 
-    <TextView
-        android:id="@+id/firestore_rating_comment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
-        android:textColor="@color/greyPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/firestore_rating_name"
-        app:layout_constraintTop_toBottomOf="@+id/firestore_rating_name"
-        tools:text="價格貴了點，不過好吃、乾淨、衛生" />
+        <TextView
+            android:id="@+id/firestore_rating_text_divider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/divider_bullet"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_name"
+            app:layout_constraintStart_toEndOf="@+id/firestore_rating_name"
+            app:layout_constraintTop_toTopOf="@+id/firestore_rating_name" />
 
-    <View
-        android:id="@+id/firestore_rating_divider"
-        style="@style/AppTheme.Divider" />
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/firestore_rating_date"
+            style="@style/AppTheme.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@color/greySecondary"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_text_divider"
+            app:layout_constraintStart_toEndOf="@+id/firestore_rating_text_divider"
+            app:layout_constraintTop_toTopOf="@+id/firestore_rating_text_divider"
+            tools:text="17/10/2018" />
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/firestore_rating_rating"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_rating_date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/firestore_rating_date" />
+
+        <TextView
+            android:id="@+id/firestore_rating_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/greyPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/firestore_rating_name"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_rating_name"
+            tools:text="價格貴了點，不過好吃、乾淨、衛生" />
+
+        <View
+            android:id="@+id/firestore_rating_divider"
+            style="@style/AppTheme.Divider" />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

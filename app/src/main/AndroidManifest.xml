@@ -23,7 +23,7 @@
         <activity android:name=".ratingbar.RatingBarActivity" />
         <activity android:name=".firestore.FirestoreActivity" />
         <activity android:name=".mvvm.MvvmActivity" />
-        <activity android:name=".firestore.FirestoreDetailActivity"></activity>
+        <activity android:name=".firestore.FirestoreDetailActivity" />
     </application>
 
 </manifest>

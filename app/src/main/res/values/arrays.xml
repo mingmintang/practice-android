@@ -85,7 +85,7 @@
         <item>連江縣</item>
     </string-array>
 
-    <string-array name="prices">
+    <string-array name="price_levels">
         <item>所有價位</item>
         <item>$</item>
         <item>$$</item>

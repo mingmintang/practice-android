@@ -1,178 +1,228 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimaryBackground"
-    tools:context=".firestore.FirestoreDetailActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/firestore_detail_image"
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.mingmin.materialdesign.firestore.DetailViewModel" />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:alpha="1.0"
-        android:scaleType="centerCrop"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_launcher_background" />
-
-    <ImageView
-        android:id="@+id/firestore_detail_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackground"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_close_white_24dp" />
-
-    <TextView
-        android:id="@+id/firestore_detail_restaurant_name"
-        style="@style/AppTheme.Title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="4dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/firestore_detail_rating"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="鼎泰豐" />
-
-    <me.zhanghai.android.materialratingbar.MaterialRatingBar
-        android:id="@+id/firestore_detail_rating"
-        style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/firestore_detail_category"
-        app:layout_constraintStart_toStartOf="parent"
-        app:mrb_progressTint="@android:color/white"
-        app:mrb_secondaryProgressTint="@android:color/white" />
-
-    <TextView
-        android:id="@+id/firestore_detail_rating_num"
-        style="@style/AppTheme.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_rating"
-        app:layout_constraintStart_toEndOf="@+id/firestore_detail_rating"
-        app:layout_constraintTop_toTopOf="@+id/firestore_detail_rating"
-        tools:text="(10)" />
-
-    <TextView
-        android:id="@+id/firestore_detail_category"
-        style="@style/AppTheme.Subheader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="8dp"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_image"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="義式" />
-
-    <TextView
-        android:id="@+id/firestore_detail_divider"
-        style="@style/AppTheme.TextDivider"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/divider_bullet"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_category"
-        app:layout_constraintStart_toEndOf="@+id/firestore_detail_category"
-        app:layout_constraintTop_toTopOf="@+id/firestore_detail_category" />
-
-    <TextView
-        android:id="@+id/firestore_detail_city"
-        style="@style/AppTheme.Subheader"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_category"
-        app:layout_constraintStart_toEndOf="@+id/firestore_detail_divider"
-        app:layout_constraintTop_toTopOf="@+id/firestore_detail_category"
-        tools:text="台北" />
-
-    <TextView
-        android:id="@+id/firestore_detail_price"
-        style="@style/AppTheme.Body1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="0dp"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_restaurant_name"
-        app:layout_constraintEnd_toEndOf="@+id/firestore_detail_image"
-        tools:text="$$$" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/firestore_detail_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="180dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firestore_detail_image"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/firestore_detail_ratings"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="0dp"
-        android:background="@android:color/transparent"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firestore_detail_fab"
-        tools:listitem="@layout/item_firestore_rating"
-        tools:visibility="visible" />
-
-    <LinearLayout
-        android:id="@+id/firestore_detail_empty_result"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="0dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/firestore_detail_ratings"
-        tools:visibility="gone">
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryBackground"
+        tools:context=".firestore.FirestoreDetailActivity">
 
         <ImageView
+            android:id="@+id/firestore_detail_image"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{viewModel.imageUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/gradient_up" />
+
+        <ImageView
+            android:id="@+id/firestore_detail_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_warning"
-            android:tint="@color/colorError" />
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_close_white_24dp" />
 
         <TextView
+            android:id="@+id/firestore_detail_restaurant_name"
+            style="@style/AppTheme.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:text="@{viewModel.doc.name}"
+            app:layout_constraintBottom_toTopOf="@+id/firestore_detail_rating"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="鼎泰豐" />
+
+        <me.zhanghai.android.materialratingbar.MaterialRatingBar
+            android:id="@+id/firestore_detail_rating"
+            style="@style/Widget.MaterialRatingBar.RatingBar.Indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/firestore_detail_category"
+            app:layout_constraintStart_toStartOf="parent"
+            app:ratingAvg="@{viewModel.doc.ratingAvg}"
+            app:mrb_progressTint="@android:color/white"
+            app:mrb_secondaryProgressTint="@android:color/white" />
+
+        <TextView
+            android:id="@+id/firestore_detail_rating_num"
             style="@style/AppTheme.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="寫第一篇評論吧"
-            android:textColor="@color/greyDisabled" />
-    </LinearLayout>
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:ratingNum="@{viewModel.doc.ratingNum}"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_rating"
+            app:layout_constraintStart_toEndOf="@+id/firestore_detail_rating"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_rating"
+            tools:text="(10)" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/firestore_detail_category"
+            style="@style/AppTheme.Subheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="8dp"
+            android:textColor="@android:color/white"
+            android:text="@{viewModel.doc.category}"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_image"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="義式" />
+
+        <TextView
+            android:id="@+id/firestore_detail_divider"
+            style="@style/AppTheme.TextDivider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/divider_bullet"
+            android:textColor="@android:color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_category"
+            app:layout_constraintStart_toEndOf="@+id/firestore_detail_category"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_category" />
+
+        <TextView
+            android:id="@+id/firestore_detail_city"
+            style="@style/AppTheme.Subheader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:textColor="@android:color/white"
+            android:text="@{viewModel.doc.city}"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_category"
+            app:layout_constraintStart_toEndOf="@+id/firestore_detail_divider"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_category"
+            tools:text="台北" />
+
+        <TextView
+            android:id="@+id/firestore_detail_price"
+            style="@style/AppTheme.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="0dp"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            app:priceLevel="@{viewModel.doc.price}"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_detail_restaurant_name"
+            app:layout_constraintEnd_toEndOf="@+id/firestore_detail_image"
+            tools:text="$$$" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/firestore_detail_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="180dp"
+            android:layout_marginEnd="16dp"
+            android:onClick="popupAddRatingDialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_image"
+            app:srcCompat="@drawable/ic_add_white_24dp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/firestore_detail_ratings"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_detail_fab"
+            tools:listitem="@layout/item_firestore_rating"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/firestore_detail_empty_result"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryBackground"
+            app:isEmpty="@{viewModel.isEmpty}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_ratings"
+            tools:visibility="gone">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_warning"
+                android:tint="@color/colorError" />
+
+            <TextView
+                style="@style/AppTheme.Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="寫第一篇評論吧"
+                android:textColor="@color/greyDisabled" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/firestore_detail_loading"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryBackground"
+            app:isLoading="@{viewModel.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/firestore_detail_ratings"
+            tools:visibility="gone">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>
