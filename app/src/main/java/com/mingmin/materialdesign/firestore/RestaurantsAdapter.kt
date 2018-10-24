@@ -12,8 +12,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.mingmin.materialdesign.R
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
-open class FirestoreAdapter(options: FirestoreRecyclerOptions<RestaurantDoc>) :
-        FirestoreRecyclerAdapter<RestaurantDoc, FirestoreAdapter.ViewHolder>(options) {
+open class RestaurantsAdapter(options: FirestoreRecyclerOptions<RestaurantDoc>) :
+        FirestoreRecyclerAdapter<RestaurantDoc, RestaurantsAdapter.ViewHolder>(options) {
     class ViewHolder(itemView: View, listener: ItemClickListener?) : RecyclerView.ViewHolder(itemView) {
         val name = itemView.findViewById<TextView>(R.id.firestore_restaurant_name)
         val city = itemView.findViewById<TextView>(R.id.firestore_restaurant_city)

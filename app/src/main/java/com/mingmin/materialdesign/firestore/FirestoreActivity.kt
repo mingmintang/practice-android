@@ -2,30 +2,33 @@ package com.mingmin.materialdesign.firestore
 
 import android.app.Activity
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestoreException
-import com.google.firebase.firestore.Query
 import com.mingmin.materialdesign.BuildConfig
 import com.mingmin.materialdesign.R
+import com.mingmin.materialdesign.databinding.ActivityFirestoreBinding
+import com.mingmin.materialdesign.firestore.ViewModel.Companion.DEFAULT_COUNT
 import kotlinx.android.synthetic.main.activity_firestore.*
 
-class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListener {
-    lateinit var mAdapter: FirestoreAdapter
+class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListener {
+    lateinit var viewModel: ViewModel
+    lateinit var binding: ActivityFirestoreBinding
+    lateinit var restaurantsAdapter: RestaurantsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_firestore)
-        setSupportActionBar(firestore_toolbar)
+        viewModel = ViewModel()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_firestore)
+        binding.viewModel = viewModel
 
+        setSupportActionBar(firestore_toolbar)
         initRecyclerView()
     }
 
@@ -37,8 +40,7 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
             return
         }
 
-        showLoading()
-        mAdapter.startListening()
+        viewModel.startListener(restaurantsAdapter)
     }
 
     fun hasSignIn(): Boolean {
@@ -57,32 +59,15 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
     }
 
     fun initRecyclerView() {
-        val query = Cloud.getRestaurantQuery(RestaurantDoc.FIELD_RATING_AVG,
-                Query.Direction.DESCENDING, QUERY_LIMIT)
-        val options =
-                FirestoreRecyclerOptions.Builder<RestaurantDoc>()
-                        .setQuery(query, RestaurantDoc::class.java)
-                        .build()
-        mAdapter = object : FirestoreAdapter(options) {
-            override fun onDataChanged() {
-                super.onDataChanged()
-                if (itemCount == 0) showEmpty() else showList()
-            }
-
-            override fun onError(e: FirebaseFirestoreException) {
-                super.onError(e)
-                showEmpty()
-            }
-        }.also {
-            it.setItemClickListener(this)
-        }
+        restaurantsAdapter = viewModel.createRestaurantsAdapter()
+        restaurantsAdapter.setItemClickListener(this)
         firestore_restaurants.layoutManager = LinearLayoutManager(this)
-        firestore_restaurants.adapter = mAdapter
+        firestore_restaurants.adapter = restaurantsAdapter
     }
 
     override fun onStop() {
         super.onStop()
-        mAdapter.stopListening()
+        viewModel.stopListener(restaurantsAdapter)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -111,9 +96,7 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
     }
 
     fun addRandomItems() {
-        showLoading()
-        Cloud.addRandomRestaurants(this, DEFAULT_COUNT).addOnCompleteListener {
-
+        viewModel.addRandomRestaurants(this, DEFAULT_COUNT).addOnCompleteListener {
             if (it.isSuccessful) {
                 Snackbar.make(firestore_restaurants, "已新增${DEFAULT_COUNT}個隨機餐廳", Snackbar.LENGTH_SHORT)
                         .show()
@@ -125,8 +108,7 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
     }
 
     fun clearItems() {
-        showLoading()
-        Cloud.clearRestaurants(DEFAULT_COUNT).addOnCompleteListener {
+        viewModel.clearRestaurants(DEFAULT_COUNT).addOnCompleteListener {
             if (it.isSuccessful) {
                 Snackbar.make(firestore_restaurants, "已刪除${it.result}個餐廳", Snackbar.LENGTH_SHORT)
                         .show()
@@ -138,28 +120,9 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
     }
 
     fun signOut() {
-        showLoading()
         AuthUI.getInstance().signOut(this).addOnCompleteListener {
             startSignIn()
         }
-    }
-
-    fun showLoading() {
-        firestore_restaurants.visibility = View.GONE
-        firestore_loading.visibility = View.VISIBLE
-        firestore_empty_result.visibility = View.GONE
-    }
-
-    fun showEmpty() {
-        firestore_restaurants.visibility = View.GONE
-        firestore_loading.visibility = View.GONE
-        firestore_empty_result.visibility = View.VISIBLE
-    }
-
-    fun showList() {
-        firestore_restaurants.visibility = View.VISIBLE
-        firestore_loading.visibility = View.GONE
-        firestore_empty_result.visibility = View.GONE
     }
 
     override fun onItemClick(restaurantId: String) {
@@ -170,7 +133,5 @@ class FirestoreActivity : AppCompatActivity(), FirestoreAdapter.ItemClickListene
 
     companion object {
         const val RC_SIGN_IN = 1
-        const val QUERY_LIMIT = 50
-        const val DEFAULT_COUNT = 20
     }
 }

@@ -71,7 +71,13 @@
 
         <View
             android:id="@+id/firestore_rating_divider"
-            style="@style/AppTheme.Divider" />
+            style="@style/AppTheme.Divider"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_rating_comment" />
     </android.support.constraint.ConstraintLayout>
 
 </layout>

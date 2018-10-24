@@ -12,7 +12,7 @@ import me.zhanghai.android.materialratingbar.MaterialRatingBar
 import java.text.SimpleDateFormat
 import java.util.*
 
-open class RatingAdapter(options: FirestoreRecyclerOptions<RatingDoc>) : FirestoreRecyclerAdapter<RatingDoc, RatingAdapter.ViewHolder>(options) {
+open class RatingsAdapter(options: FirestoreRecyclerOptions<RatingDoc>) : FirestoreRecyclerAdapter<RatingDoc, RatingsAdapter.ViewHolder>(options) {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val name = itemView.findViewById<TextView>(R.id.firestore_rating_name)
         val date = itemView.findViewById<TextView>(R.id.firestore_rating_date)

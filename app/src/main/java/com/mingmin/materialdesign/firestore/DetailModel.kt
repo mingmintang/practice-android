@@ -4,10 +4,7 @@ import android.util.Log
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.EventListener
-import com.google.firebase.firestore.ListenerRegistration
-import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.*
 
 class DetailModel {
     interface RestaurantDataReadyListener {
@@ -46,8 +43,24 @@ class DetailModel {
         if (user != null) {
             val uid = user.uid
             val userName = if (user.displayName != null) user.displayName!! else ""
-            val doc = RatingDoc(uid, userName, rating, comment)
-            Firestore.getRestaurantRatingCollection(restaurantId).add(doc).addOnSuccessListener {
+            val ratingDoc = RatingDoc(uid, userName, rating, comment)
+            val restaurantRef = Firestore.getRestaurantDocument(restaurantId)
+            val ratingRef = Firestore.getRestaurantRatingCollection(restaurantId).document()
+
+            Firestore.fdb.runTransaction { transaction ->
+                val restaurantDoc = transaction.get(restaurantRef).toObject(RestaurantDoc::class.java)
+                restaurantDoc?.let { doc ->
+                    val newRatingNum = doc.ratingNum + 1
+                    val oldRatingTotal = doc.ratingAvg * doc.ratingNum
+                    val newRatingAvg = (oldRatingTotal + rating) / newRatingNum
+                    doc.ratingNum = newRatingNum
+                    doc.ratingAvg = newRatingAvg
+
+                    transaction.set(restaurantRef, doc)
+                    transaction.set(ratingRef, ratingDoc)
+                }
+                null
+            }.addOnSuccessListener {
                 source.setResult(null)
             }.addOnFailureListener {
                 source.setException(it)

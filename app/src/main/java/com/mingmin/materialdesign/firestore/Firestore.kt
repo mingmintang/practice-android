@@ -25,4 +25,8 @@ object Firestore {
     fun getRestaurantRatingCollection(restaurantId: String): CollectionReference {
         return getRestaurantDocument(restaurantId).collection("rating")
     }
+
+    fun getRestaurantRatingDocument(restaurantId: String, ratingId: String): DocumentReference {
+        return getRestaurantRatingCollection(restaurantId).document(ratingId)
+    }
 }

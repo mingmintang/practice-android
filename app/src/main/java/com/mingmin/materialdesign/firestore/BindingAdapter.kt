@@ -11,8 +11,8 @@ import com.mingmin.materialdesign.R
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
 @BindingAdapter("app:imageUrl")
-fun ImageView.setImageUrl(url: ObservableField<String>) {
-    Glide.with(context).load(url.get()).into(this)
+fun ImageView.setImageUrl(url: String) {
+    Glide.with(context).load(url).into(this)
 }
 
 @BindingAdapter("app:ratingNum")
@@ -32,8 +32,8 @@ fun TextView.setPriceLevel(price: Int) {
 }
 
 @BindingAdapter("app:isLoading")
-fun View.setLoadingState(isLoading: ObservableBoolean) {
-    if (isLoading.get()) {
+fun View.setLoadingState(isLoading: Boolean) {
+    if (isLoading) {
         visibility = View.VISIBLE
     } else {
         visibility = View.GONE
@@ -41,10 +41,32 @@ fun View.setLoadingState(isLoading: ObservableBoolean) {
 }
 
 @BindingAdapter("app:isEmpty")
-fun View.setEmptyState(isEmpty: ObservableBoolean) {
-    if (isEmpty.get()) {
+fun View.setEmptyState(isEmpty: Boolean) {
+    if (isEmpty) {
         visibility = View.VISIBLE
     } else {
         visibility = View.GONE
+    }
+}
+
+@BindingAdapter("app:visibleOrGone")
+fun View.setVisibleOrGone(isShow: Boolean) {
+    if (isShow) {
+        visibility = View.VISIBLE
+    } else {
+        visibility = View.GONE
+    }
+}
+
+@BindingAdapter("app:goneWhenLoading", "app:visibleOrGone")
+fun View.setContentVisibleOrGone(isLoading: Boolean, isShow: Boolean) {
+    if (isLoading) {
+        visibility = View.GONE
+    } else {
+        if (isShow) {
+            visibility = View.VISIBLE
+        } else {
+            visibility = View.GONE
+        }
     }
 }

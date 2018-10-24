@@ -13,7 +13,7 @@ class FirestoreDetailActivity : AppCompatActivity(),
         AddRatingDialogFragment.AddRatingDialogListener {
     lateinit var viewModel: DetailViewModel
     lateinit var binding: ActivityFirestoreDetailBinding
-    lateinit var ratingAdapter: RatingAdapter
+    lateinit var ratingsAdapter: RatingsAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,22 +21,26 @@ class FirestoreDetailActivity : AppCompatActivity(),
         viewModel = DetailViewModel(intent.getStringExtra("restaurantId"))
         binding = DataBindingUtil.setContentView(this, R.layout.activity_firestore_detail)
         binding.viewModel = viewModel
-        ratingAdapter = viewModel.createRatingAdapter()
+        ratingsAdapter = viewModel.createRatingAdapter()
 
         with(binding.firestoreDetailRatings) {
             layoutManager = LinearLayoutManager(context)
-            adapter = ratingAdapter
+            adapter = ratingsAdapter
         }
     }
 
     override fun onStart() {
         super.onStart()
-        viewModel.startListener(ratingAdapter)
+        viewModel.startListener(ratingsAdapter)
     }
 
     override fun onStop() {
         super.onStop()
-        viewModel.stopListener(ratingAdapter)
+        viewModel.stopListener(ratingsAdapter)
+    }
+
+    fun goBackToPrevious(view: View) {
+        finishAfterTransition()
     }
 
     fun popupAddRatingDialog(view: View) {

@@ -1,16 +1,26 @@
 package com.mingmin.materialdesign.firestore
 
 import android.content.Context
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
+import com.google.android.gms.tasks.Tasks
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ServerTimestamp
 import com.mingmin.materialdesign.R
 import java.util.*
+import java.util.concurrent.Executor
 
-object Cloud {
+class Model {
+
+    fun getRestaurantsQuery(orderBy: String,
+                            orderDerection: Query.Direction, limit: Int): Query {
+        return Firestore.getRestaurantCollection()
+                .orderBy(orderBy, orderDerection)
+                .limit(limit.toLong())
+    }
+
     fun addRandomRestaurants(context: Context, count: Int): Task<Void> {
         val col = Firestore.getRestaurantCollection()
         val batch = Firestore.getWriteBatch()
@@ -42,39 +52,45 @@ object Cloud {
         return batch.commit()
     }
 
-    fun clearRestaurants(count: Int): Task<Int> {
+    fun clearRestaurants(exe: Executor, count: Int): Task<Int> {
         val source = TaskCompletionSource<Int>()
         val batch = Firestore.getWriteBatch()
-
-        getRestaurantQuery(RestaurantDoc.FIELD_RATING_AVG, Query.Direction.DESCENDING, count)
-                .get().addOnCompleteListener {
-                    var resultCount = 0
-                    if (it.isSuccessful) {
-                        it.result?.iterator()?.forEach { doc ->
-                            batch.delete(Firestore.getRestaurantDocument(doc.id))
-                            resultCount += 1
+        getRestaurantsQuery(RestaurantDoc.FIELD_RATING_AVG, Query.Direction.DESCENDING, count)
+                .get().addOnCompleteListener(exe, OnCompleteListener<QuerySnapshot> { task ->
+                    var restaurantCount = 0
+                    if (task.isSuccessful) {
+                        task.result?.iterator()?.forEach { snap ->
+                            val restaurantId = snap.id
+                            batch.delete(Firestore.getRestaurantDocument(restaurantId))
+                            restaurantCount += 1
+                            val subTask = Firestore
+                                    .getRestaurantRatingCollection(restaurantId).get()
+                                    .addOnCompleteListener { subTask ->
+                                        if (subTask.isSuccessful) {
+                                            subTask.result?.iterator()?.forEach { subSnap ->
+                                                batch.delete(Firestore.getRestaurantRatingDocument(restaurantId, subSnap.id))
+                                            }
+                                        }
+                                    }
+                            Tasks.await(subTask)
                         }
                     }
 
-                    if (resultCount > 0) {
+                    if (restaurantCount > 0) {
                         batch.commit().addOnSuccessListener { void ->
-                            source.setResult(resultCount)
+                            source.setResult(restaurantCount)
                         }.addOnFailureListener { exception ->
                             source.setException(exception)
                         }
                     } else {
-                        source.setException(Exception("Result count is empty."))
+                        source.setException(Exception("Restaurant count is empty."))
                     }
-
-                }
+                })
         return source.task
     }
 
-    fun getRestaurantQuery(orderBy: String,
-                 orderDerection: Query.Direction, limit: Int): Query {
-        return Firestore.getRestaurantCollection()
-                .orderBy(orderBy, orderDerection)
-                .limit(limit.toLong())
+    companion object {
+        const val TAG = "Model"
     }
 }
 
@@ -83,8 +99,8 @@ data class RestaurantDoc(val name: String = "",
                          val category: String = "",
                          val photo: String = "",
                          val price: Int = 1,
-                         val ratingNum: Int = 0,
-                         val ratingAvg: Double = 0.0) {
+                         var ratingNum: Int = 0,
+                         var ratingAvg: Double = 0.0) {
     companion object {
         val FIELD_NAME = "name"
         val FIELD_CITY = "city"

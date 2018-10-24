@@ -4,11 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewModel"
             type="com.mingmin.materialdesign.firestore.DetailViewModel" />
-
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -22,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            app:imageUrl="@{viewModel.imageUrl}"
+            app:imageUrl="@{viewModel.imageUrl.get()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -43,6 +41,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:background="?attr/selectableItemBackground"
+            android:onClick="goBackToPrevious"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_close_white_24dp" />
@@ -177,7 +176,7 @@
             android:orientation="vertical"
             android:visibility="gone"
             android:background="@color/colorPrimaryBackground"
-            app:isEmpty="@{viewModel.isEmpty}"
+            app:isEmpty="@{viewModel.isEmpty().get()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +210,7 @@
             android:orientation="vertical"
             android:visibility="gone"
             android:background="@color/colorPrimaryBackground"
-            app:isLoading="@{viewModel.isLoading}"
+            app:isLoading="@{viewModel.isLoading().get()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
