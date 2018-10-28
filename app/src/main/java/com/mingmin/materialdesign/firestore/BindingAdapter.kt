@@ -11,8 +11,8 @@ import com.mingmin.materialdesign.R
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
 @BindingAdapter("app:imageUrl")
-fun ImageView.setImageUrl(url: String) {
-    Glide.with(context).load(url).into(this)
+fun ImageView.setImageUrl(url: ObservableField<String>) {
+    Glide.with(context).load(url.get()).into(this)
 }
 
 @BindingAdapter("app:ratingNum")

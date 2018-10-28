@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.firestore.Query
 import com.mingmin.materialdesign.R
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
@@ -26,13 +27,13 @@ open class RestaurantsAdapter(options: FirestoreRecyclerOptions<RestaurantDoc>) 
 
         init {
             itemView.setOnClickListener {
-                listener?.onItemClick(it.tag as String)
+                listener?.onRestaurantsItemClick(it.tag as String)
             }
         }
     }
 
     interface ItemClickListener {
-        fun onItemClick(restaurantId: String)
+        fun onRestaurantsItemClick(restaurantId: String)
     }
 
     var mItemClickListener: ItemClickListener? = null

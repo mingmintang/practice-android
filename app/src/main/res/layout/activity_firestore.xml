@@ -47,6 +47,7 @@
                         android:clickable="true"
                         android:elevation="8dp"
                         android:focusable="true"
+                        android:onClick="popupRestaurantsFilterDialog"
                         android:foreground="?attr/selectableItemBackground">
 
                         <android.support.constraint.ConstraintLayout
@@ -74,6 +75,7 @@
                                 android:layout_marginStart="16dp"
                                 android:layout_marginTop="8dp"
                                 android:textColor="@color/greySecondary"
+                                android:text="@{viewModel.category.get()}"
                                 app:layout_constraintStart_toEndOf="@+id/firestore_filter_icon"
                                 app:layout_constraintTop_toTopOf="parent"
                                 tools:text="@string/all_restaurants" />
@@ -85,23 +87,31 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginBottom="8dp"
                                 android:textColor="@color/greyDisabled"
+                                android:text="@{viewModel.sortDesc.get()}"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintStart_toStartOf="@+id/firestore_current_search"
                                 app:layout_constraintTop_toBottomOf="@+id/firestore_current_search"
                                 tools:text="排序: 評分" />
 
-                            <ImageView
+                            <FrameLayout
                                 android:id="@+id/firestore_clear_filter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                                android:layout_marginEnd="8dp"
-                                android:layout_marginBottom="8dp"
-                                android:tint="@color/greySecondary"
+                                android:layout_width="40dp"
+                                android:layout_height="0dp"
                                 app:layout_constraintBottom_toBottomOf="parent"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
-                                app:srcCompat="@drawable/ic_close_white_24dp" />
+                                android:foreground="?attr/selectableItemBackground"
+                                android:onClick="resetRestaurantsFilter">
+
+                                <ImageView
+                                    android:id="@+id/firestore_clear_filter_icon"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:tint="@color/greySecondary"
+                                    android:layout_gravity="center"
+                                    app:srcCompat="@drawable/ic_close_white_24dp" />
+                            </FrameLayout>
+
                         </android.support.constraint.ConstraintLayout>
 
                     </android.support.v7.widget.CardView>

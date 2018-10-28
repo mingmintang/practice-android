@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/firestore_filter_title"
+            style="@style/AppTheme.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/filter"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/firestore_category_icon"
+            style="@style/AppTheme.FilterIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:tint="@color/greySecondary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_filter_title"
+            app:srcCompat="@drawable/ic_fastfood_white_24dp" />
+
+        <Spinner
+            android:id="@+id/firestore_category_spinner"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:entries="@array/catelogies"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_category_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/firestore_category_icon"
+            app:layout_constraintTop_toTopOf="@+id/firestore_category_icon" />
+
+        <ImageView
+            android:id="@+id/firestore_city_icon"
+            style="@style/AppTheme.FilterIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="24dp"
+            android:tint="@color/greySecondary"
+            app:layout_constraintStart_toStartOf="@+id/firestore_category_icon"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_category_icon"
+            app:srcCompat="@drawable/ic_map_marker" />
+
+        <Spinner
+            android:id="@+id/firestore_city_spinner"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:entries="@array/cities"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_city_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/firestore_city_icon"
+            app:layout_constraintTop_toTopOf="@+id/firestore_city_icon" />
+
+        <ImageView
+            android:id="@+id/firestore_price_icon"
+            style="@style/AppTheme.FilterIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="24dp"
+            android:tint="@color/greySecondary"
+            app:layout_constraintStart_toStartOf="@+id/firestore_city_icon"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_city_icon"
+            app:srcCompat="@drawable/ic_monetization_on_white_24dp" />
+
+        <Spinner
+            android:id="@+id/firestore_price_spinner"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:entries="@array/price_levels"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_price_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/firestore_price_icon"
+            app:layout_constraintTop_toTopOf="@+id/firestore_price_icon" />
+
+        <ImageView
+            android:id="@+id/firestore_sort_icon"
+            style="@style/AppTheme.FilterIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="24dp"
+            android:tint="@color/greySecondary"
+            app:layout_constraintStart_toStartOf="@+id/firestore_price_icon"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_price_icon"
+            app:srcCompat="@drawable/ic_sort_white_24dp" />
+
+        <Spinner
+            android:id="@+id/firestore_sort_spinner"
+            style="@style/AppTheme.FilterSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:entries="@array/sort_descriptions"
+            app:layout_constraintBottom_toBottomOf="@+id/firestore_sort_icon"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/firestore_sort_icon"
+            app:layout_constraintTop_toTopOf="@+id/firestore_sort_icon" />
+
+        <Button
+            android:id="@+id/firestore_filter_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="@string/confirm"
+            android:theme="@style/ThemeOverlay.FilterButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_sort_spinner" />
+
+        <Button
+            android:id="@+id/firestore_filter_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/cancel"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:theme="@style/ThemeOverlay.FilterButton"
+            app:layout_constraintEnd_toStartOf="@+id/firestore_filter_confirm"
+            app:layout_constraintTop_toBottomOf="@+id/firestore_sort_spinner" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

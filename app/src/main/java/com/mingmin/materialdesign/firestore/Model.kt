@@ -13,12 +13,32 @@ import java.util.*
 import java.util.concurrent.Executor
 
 class Model {
+    class Filter(val category: String?, val city: String?, val price: Int?)
 
-    fun getRestaurantsQuery(orderBy: String,
-                            orderDerection: Query.Direction, limit: Int): Query {
-        return Firestore.getRestaurantCollection()
-                .orderBy(orderBy, orderDerection)
-                .limit(limit.toLong())
+    fun getSortByDirection(sortBy: String): Query.Direction {
+        var direction = Query.Direction.ASCENDING
+        when(sortBy) {
+            RestaurantDoc.FIELD_RATING_AVG -> direction = Query.Direction.DESCENDING
+            RestaurantDoc.FIELD_RATING_NUM -> direction = Query.Direction.DESCENDING
+            RestaurantDoc.FIELD_PRICE -> direction = Query.Direction.ASCENDING
+        }
+        return direction
+    }
+
+    fun getRestaurantsQuery(orderBy: String, orderDirection: Query.Direction,
+                            limit: Int, filter: Filter?): Query {
+
+        var query = Firestore.getRestaurantCollection().limit(limit.toLong())
+        filter?.let { f ->
+            f.category?.let { query = query.whereEqualTo(RestaurantDoc.FIELD_CATEGORY, it) }
+            f.city?.let { query = query.whereEqualTo(RestaurantDoc.FIELD_CITY, it) }
+            f.price?.let { query = query.whereEqualTo(RestaurantDoc.FIELD_PRICE, it) }
+        }
+        if (filter?.price == null || orderBy != RestaurantDoc.FIELD_PRICE) {
+            query = query.orderBy(orderBy, orderDirection)
+        }
+
+        return query
     }
 
     fun addRandomRestaurants(context: Context, count: Int): Task<Void> {
@@ -55,7 +75,7 @@ class Model {
     fun clearRestaurants(exe: Executor, count: Int): Task<Int> {
         val source = TaskCompletionSource<Int>()
         val batch = Firestore.getWriteBatch()
-        getRestaurantsQuery(RestaurantDoc.FIELD_RATING_AVG, Query.Direction.DESCENDING, count)
+        getRestaurantsQuery(RestaurantDoc.FIELD_RATING_AVG, Query.Direction.DESCENDING, count, null)
                 .get().addOnCompleteListener(exe, OnCompleteListener<QuerySnapshot> { task ->
                     var restaurantCount = 0
                     if (task.isSuccessful) {

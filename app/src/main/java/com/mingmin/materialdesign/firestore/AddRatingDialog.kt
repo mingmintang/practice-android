@@ -10,7 +10,7 @@ import android.widget.EditText
 import com.mingmin.materialdesign.R
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
-class AddRatingDialogFragment : DialogFragment() {
+class AddRatingDialog : DialogFragment() {
     interface AddRatingDialogListener {
         fun onAddRatingSubmit(rating: Double, comment: String)
     }

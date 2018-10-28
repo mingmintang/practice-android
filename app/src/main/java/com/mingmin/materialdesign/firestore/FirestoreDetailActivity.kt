@@ -10,7 +10,7 @@ import com.mingmin.materialdesign.R
 import com.mingmin.materialdesign.databinding.ActivityFirestoreDetailBinding
 
 class FirestoreDetailActivity : AppCompatActivity(),
-        AddRatingDialogFragment.AddRatingDialogListener {
+        AddRatingDialog.AddRatingDialogListener {
     lateinit var viewModel: DetailViewModel
     lateinit var binding: ActivityFirestoreDetailBinding
     lateinit var ratingsAdapter: RatingsAdapter
@@ -44,7 +44,7 @@ class FirestoreDetailActivity : AppCompatActivity(),
     }
 
     fun popupAddRatingDialog(view: View) {
-        AddRatingDialogFragment().show(supportFragmentManager, "ReviewDialog")
+        AddRatingDialog().show(supportFragmentManager, "ReviewDialog")
     }
 
     override fun onAddRatingSubmit(rating: Double, comment: String) {
