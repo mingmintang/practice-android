@@ -1,7 +1,6 @@
 package com.mingmin.materialdesign.firestore
 
 import android.databinding.BindingAdapter
-import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.view.View
 import android.widget.ImageView

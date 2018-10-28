@@ -14,14 +14,12 @@ class RestaurantsFilterDialog : DialogFragment() {
         fun onRestaurantsFilterConfirm(categoryId: Int, cityId: Int, priceId: Int, sortId: Int)
     }
 
-    private class Filter(var categoryId: Int = 0,
-                         var cityId: Int = 0,
-                         var priceId: Int = 0,
-                         var sortId: Int = 0)
-
+    var categoryId: Int = 0
+    var cityId: Int = 0
+    var priceId: Int = 0
+    var sortId: Int = 0
     lateinit var binding: DialogFirestoreRestaurantsFilterBinding
     var listener: RestaurantsFilterListener? = null
-    private lateinit var filter: Filter
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DataBindingUtil.inflate(LayoutInflater.from(context),
@@ -31,9 +29,10 @@ class RestaurantsFilterDialog : DialogFragment() {
             listener = context as RestaurantsFilterListener
         }
 
-        if (!::filter.isInitialized) {
-            filter = Filter()
+        arguments?.getIntArray("filters")?.let {
+            categoryId = it[0]; cityId = it[1]; priceId = it[2]; sortId = it[3]
         }
+
         initSpinnerSelection()
 
         binding.firestoreFilterConfirm.setOnClickListener {
@@ -48,40 +47,28 @@ class RestaurantsFilterDialog : DialogFragment() {
         return AlertDialog.Builder(context!!).setView(binding.root).create()
     }
 
-    fun resetRestaurantsFilter() {
-        if (!::binding.isInitialized || (filter.categoryId == 0
-                && filter.cityId == 0 && filter.priceId == 0 && filter.sortId == 0)) {
-            return
-        }
-        resetSpinnerSelection()
-        callbackResult()
-    }
-
-    private fun resetSpinnerSelection() {
-        binding.firestoreCategorySpinner.setSelection(0)
-        binding.firestoreCitySpinner.setSelection(0)
-        binding.firestorePriceSpinner.setSelection(0)
-        binding.firestoreSortSpinner.setSelection(0)
-    }
-
     private fun initSpinnerSelection() {
-        binding.firestoreCategorySpinner.setSelection(filter.categoryId)
-        binding.firestoreCitySpinner.setSelection(filter.cityId)
-        binding.firestorePriceSpinner.setSelection(filter.priceId)
-        binding.firestoreSortSpinner.setSelection(filter.sortId)
+        binding.firestoreCategorySpinner.setSelection(categoryId)
+        binding.firestoreCitySpinner.setSelection(cityId)
+        binding.firestorePriceSpinner.setSelection(priceId)
+        binding.firestoreSortSpinner.setSelection(sortId)
     }
 
     private fun callbackResult() {
-        filter.apply {
-            categoryId = binding.firestoreCategorySpinner.selectedItemPosition
-            cityId = binding.firestoreCitySpinner.selectedItemPosition
-            priceId = binding.firestorePriceSpinner.selectedItemPosition
-            sortId = binding.firestoreSortSpinner.selectedItemPosition
-        }
         listener?.onRestaurantsFilterConfirm(
-                filter.categoryId,
-                filter.cityId,
-                filter.priceId,
-                filter.sortId)
+                binding.firestoreCategorySpinner.selectedItemPosition,
+                binding.firestoreCitySpinner.selectedItemPosition,
+                binding.firestorePriceSpinner.selectedItemPosition,
+                binding.firestoreSortSpinner.selectedItemPosition)
+    }
+
+    companion object {
+        fun newInstance(categoryId: Int, cityId: Int, priceId: Int, sortId: Int): RestaurantsFilterDialog {
+            val dialog = RestaurantsFilterDialog()
+            val bundle = Bundle()
+            bundle.putIntArray("filters", arrayOf(categoryId, cityId, priceId, sortId).toIntArray())
+            dialog.arguments = bundle
+            return dialog
+        }
     }
 }

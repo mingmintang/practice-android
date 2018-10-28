@@ -3,6 +3,7 @@ package com.mingmin.materialdesign.firestore
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.content.Context
+import android.databinding.Observable
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
@@ -12,6 +13,11 @@ import com.mingmin.materialdesign.R
 import java.util.concurrent.Executors
 
 class ViewModel(application: Application) : AndroidViewModel(application) {
+    class RestaurantsFilter(val categoryId: Int = 0,
+                            val cityId: Int = 0,
+                            val priceId: Int = 0,
+                            val sortId: Int = 0)
+
     private val categories = application.resources.getStringArray(R.array.catelogies)
     private val cities = application.resources.getStringArray(R.array.cities)
     private val sortDescriptions = application.resources.getStringArray(R.array.sort_descriptions)
@@ -20,11 +26,22 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     val isEmpty = ObservableBoolean(true)
     val category = ObservableField<String>("")
     val sortDesc = ObservableField<String>("")
+    val restaurantsAdapter = ObservableField<RestaurantsAdapter>()
+    val restaurantsFilter = ObservableField<RestaurantsFilter>().apply {
+        addOnPropertyChangedCallback(object : Observable.OnPropertyChangedCallback() {
+            override fun onPropertyChanged(sender: Observable?, propertyId: Int) {
+                sender?.let {
+                    val filter = (it as ObservableField<*>).get() as RestaurantsFilter
+                    category.set(categories[filter.categoryId])
+                    sortDesc.set(sortDescriptions[filter.sortId])
+                }
+            }
+        })
+    }
 
-    fun createRestaurantsAdapter(sortBy: String, filter: Model.Filter?): RestaurantsAdapter {
+    fun createRestaurantsAdapter(sortBy: String, filter: Model.Filter?, listener: RestaurantsAdapter.ItemClickListener?) {
         if (filter == null) {
-            category.set(categories[0])
-            sortDesc.set(sortDescriptions[0])
+            restaurantsFilter.set(RestaurantsFilter())
         }
 
         val query = model.getRestaurantsQuery(sortBy,
@@ -32,7 +49,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         val options = FirestoreRecyclerOptions.Builder<RestaurantDoc>()
                         .setQuery(query, RestaurantDoc::class.java)
                         .build()
-        return object : RestaurantsAdapter(options) {
+        val resAdapter = object : RestaurantsAdapter(options) {
             override fun onDataChanged() {
                 super.onDataChanged()
                 isLoading.set(false)
@@ -45,33 +62,36 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
                 isEmpty.set(true)
             }
         }
+        listener?.let { resAdapter.setItemClickListener(it) }
+        restaurantsAdapter.set(resAdapter)
     }
 
-    fun startListener(adapter: RestaurantsAdapter) {
+    fun startListener() {
         isLoading.set(true)
-        adapter.startListening()
+        restaurantsAdapter.get()?.startListening()
     }
 
-    fun stopListener(adapter: RestaurantsAdapter) {
-        adapter.stopListening()
+    fun stopListener() {
+        restaurantsAdapter.get()?.stopListening()
     }
 
-    fun updateRestaurantsAdapter(oldAdapter: RestaurantsAdapter,
-                                 categoryId: Int, cityId: Int, priceId: Int, sortId: Int,
-                                 listener: RestaurantsAdapter.ItemClickListener?): RestaurantsAdapter {
-        stopListener(oldAdapter)
+    fun updateRestaurantsAdapter(categoryId: Int, cityId: Int, priceId: Int, sortId: Int,
+                                 listener: RestaurantsAdapter.ItemClickListener?) {
+        stopListener()
         val filter = Model.Filter(
                 if (categoryId > 0) categories[categoryId] else null,
                 if (cityId > 0) cities[cityId] else null,
                 if (priceId > 0) priceId else null
         )
-        val adapter = createRestaurantsAdapter(getSortById(sortId), filter)
-        listener?.let { adapter.setItemClickListener(it) }
-        startListener(adapter)
-        category.set(categories[categoryId])
-        sortDesc.set(sortDescriptions[sortId])
+        createRestaurantsAdapter(getSortById(sortId), filter, listener)
+        startListener()
+        restaurantsFilter.set(RestaurantsFilter(categoryId, cityId, priceId, sortId))
+    }
 
-        return adapter
+    fun resetRestaurantsAdapter(listener: RestaurantsAdapter.ItemClickListener?) {
+        stopListener()
+        createRestaurantsAdapter(RestaurantDoc.FIELD_RATING_AVG, null, listener)
+        startListener()
     }
 
     private fun getSortById(sortId: Int): String {

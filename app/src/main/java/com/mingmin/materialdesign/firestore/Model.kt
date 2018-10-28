@@ -27,7 +27,6 @@ class Model {
 
     fun getRestaurantsQuery(orderBy: String, orderDirection: Query.Direction,
                             limit: Int, filter: Filter?): Query {
-
         var query = Firestore.getRestaurantCollection().limit(limit.toLong())
         filter?.let { f ->
             f.category?.let { query = query.whereEqualTo(RestaurantDoc.FIELD_CATEGORY, it) }
@@ -107,10 +106,6 @@ class Model {
                     }
                 })
         return source.task
-    }
-
-    companion object {
-        const val TAG = "Model"
     }
 }
 

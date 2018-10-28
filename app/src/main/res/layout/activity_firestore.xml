@@ -145,6 +145,8 @@
             android:visibility="visible"
             app:visibleOrGone="@{!viewModel.isEmpty().get()}"
             app:goneWhenLoading="@{viewModel.isLoading().get()}"
+            android:adapter="@{viewModel.restaurantsAdapter.get()}"
+            app:layoutManager="android.support.v7.widget.LinearLayoutManager"
             tools:listitem="@layout/item_firestore_restaurant"
             tools:visibility="visible"/>
 

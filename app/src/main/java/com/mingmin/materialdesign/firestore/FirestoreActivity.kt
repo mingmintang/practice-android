@@ -1,12 +1,12 @@
 package com.mingmin.materialdesign.firestore
 
 import android.app.Activity
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,26 +22,18 @@ class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListe
         RestaurantsFilterDialog.RestaurantsFilterListener {
     lateinit var viewModel: ViewModel
     lateinit var binding: ActivityFirestoreBinding
-    lateinit var restaurantsAdapter: RestaurantsAdapter
-    lateinit var filterDialog: RestaurantsFilterDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModel(application)
+        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_firestore)
         binding.viewModel = viewModel
 
         setSupportActionBar(firestore_toolbar)
-        initRecyclerView()
 
-        filterDialog = RestaurantsFilterDialog()
-    }
-
-    fun initRecyclerView() {
-        restaurantsAdapter = viewModel.createRestaurantsAdapter(RestaurantDoc.FIELD_RATING_AVG, null)
-        restaurantsAdapter.setItemClickListener(this)
-        binding.firestoreRestaurants.layoutManager = LinearLayoutManager(this)
-        binding.firestoreRestaurants.adapter = restaurantsAdapter
+        if (savedInstanceState == null) {
+            viewModel.createRestaurantsAdapter(RestaurantDoc.FIELD_RATING_AVG, null, this)
+        }
     }
 
     override fun onStart() {
@@ -52,7 +44,7 @@ class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListe
             return
         }
 
-        viewModel.startListener(restaurantsAdapter)
+        viewModel.startListener()
     }
 
     fun hasSignIn(): Boolean {
@@ -72,7 +64,7 @@ class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListe
 
     override fun onStop() {
         super.onStop()
-        viewModel.stopListener(restaurantsAdapter)
+        viewModel.stopListener()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -137,18 +129,18 @@ class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListe
     }
 
     fun popupRestaurantsFilterDialog(view: View) {
-        filterDialog.show(supportFragmentManager, "RestaurantsFilter")
+        viewModel.restaurantsFilter.get()?.let {
+            RestaurantsFilterDialog.newInstance(it.categoryId, it.cityId, it.priceId, it.sortId)
+                    .show(supportFragmentManager, "RestaurantsFilter")
+        }
     }
 
     override fun onRestaurantsFilterConfirm(categoryId: Int, cityId: Int, priceId: Int, sortId: Int) {
-        restaurantsAdapter = viewModel.updateRestaurantsAdapter(restaurantsAdapter,
-                categoryId, cityId, priceId, sortId,
-                this)
-        binding.firestoreRestaurants.swapAdapter(restaurantsAdapter, false)
+        viewModel.updateRestaurantsAdapter(categoryId, cityId, priceId, sortId, this)
     }
 
     fun resetRestaurantsFilter(view: View) {
-        filterDialog.resetRestaurantsFilter()
+        viewModel.resetRestaurantsAdapter(this)
     }
 
     companion object {
