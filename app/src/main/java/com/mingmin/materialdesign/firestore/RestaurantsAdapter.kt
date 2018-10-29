@@ -9,8 +9,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
-import com.google.firebase.firestore.Query
 import com.mingmin.materialdesign.R
+import com.mingmin.materialdesign.firestore.firestore.RestaurantDoc
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 
 open class RestaurantsAdapter(options: FirestoreRecyclerOptions<RestaurantDoc>) :

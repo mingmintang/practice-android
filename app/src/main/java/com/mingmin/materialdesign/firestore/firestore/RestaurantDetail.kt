@@ -1,4 +1,4 @@
-package com.mingmin.materialdesign.firestore
+package com.mingmin.materialdesign.firestore.firestore
 
 import android.util.Log
 import com.google.android.gms.tasks.Task
@@ -6,7 +6,7 @@ import com.google.android.gms.tasks.TaskCompletionSource
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
-class DetailModel {
+class RestaurantDetail {
     interface RestaurantDataReadyListener {
         fun onDataReady(doc: RestaurantDoc?)
     }
@@ -79,6 +79,6 @@ class DetailModel {
     }
 
     companion object {
-        const val TAG = "DetailModel"
+        const val TAG = "RestaurantDetail"
     }
 }

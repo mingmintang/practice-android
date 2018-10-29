@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.mingmin.materialdesign.firestore.DetailViewModel" />
+            type="com.mingmin.materialdesign.firestore.viewmodel.DetailViewModel" />
     </data>
 
     <android.support.constraint.ConstraintLayout

@@ -8,8 +8,8 @@ import android.support.v7.widget.DefaultItemAnimator
 import android.support.v7.widget.LinearLayoutManager
 import com.mingmin.materialdesign.bottomsheet.BottomSheetActivity
 import com.mingmin.materialdesign.firestore.FirestoreActivity
-import com.mingmin.materialdesign.mvvm.MvvmActivity
 import com.mingmin.materialdesign.ratingbar.RatingBarActivity
+import com.mingmin.materialdesign.retrofit.RetrofitActivity
 import com.mingmin.materialdesign.transparenttoolbar.TransparentToolbarActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity(), MainRecyclerViewAdapter.OnItemClickLis
             1 -> intent = Intent(this, TransparentToolbarActivity::class.java)
             2 -> intent = Intent(this, RatingBarActivity::class.java)
             3 -> intent = Intent(this, FirestoreActivity::class.java)
+            4 -> intent = Intent(this, RetrofitActivity::class.java)
             else -> intent = null
         }
         intent?.let {

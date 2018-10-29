@@ -24,6 +24,7 @@
         <activity android:name=".firestore.FirestoreActivity" />
         <activity android:name=".mvvm.MvvmActivity" />
         <activity android:name=".firestore.FirestoreDetailActivity" />
+        <activity android:name=".retrofit.RetrofitActivity"></activity>
     </application>
 
 </manifest>

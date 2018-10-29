@@ -1,4 +1,4 @@
-package com.mingmin.materialdesign.firestore
+package com.mingmin.materialdesign.firestore.firestore
 
 import android.content.Context
 import com.google.android.gms.tasks.OnCompleteListener
@@ -12,7 +12,7 @@ import com.mingmin.materialdesign.R
 import java.util.*
 import java.util.concurrent.Executor
 
-class Model {
+class Restaurants {
     class Filter(val category: String?, val city: String?, val price: Int?)
 
     fun getSortByDirection(sortBy: String): Query.Direction {
@@ -64,7 +64,7 @@ class Model {
             val price = prices.get(random.nextInt(prices.size))
             val ratingNum = random.nextInt(100)
             val ratingAvg = random.nextDouble() * 5
-            val doc = RestaurantDoc(name, city, category, photoUrl,price, ratingNum, ratingAvg)
+            val doc = RestaurantDoc(name, city, category, photoUrl, price, ratingNum, ratingAvg)
             batch.set(Firestore.getRestaurantDocument(col.document().id), doc)
         }
 
@@ -82,8 +82,7 @@ class Model {
                             val restaurantId = snap.id
                             batch.delete(Firestore.getRestaurantDocument(restaurantId))
                             restaurantCount += 1
-                            val subTask = Firestore
-                                    .getRestaurantRatingCollection(restaurantId).get()
+                            val subTask = Firestore.getRestaurantRatingCollection(restaurantId).get()
                                     .addOnCompleteListener { subTask ->
                                         if (subTask.isSuccessful) {
                                             subTask.result?.iterator()?.forEach { subSnap ->

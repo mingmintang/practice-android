@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.mingmin.materialdesign.R
 import com.mingmin.materialdesign.databinding.ActivityFirestoreDetailBinding
+import com.mingmin.materialdesign.firestore.viewmodel.DetailViewModel
 
 class FirestoreDetailActivity : AppCompatActivity(),
         AddRatingDialog.AddRatingDialogListener {

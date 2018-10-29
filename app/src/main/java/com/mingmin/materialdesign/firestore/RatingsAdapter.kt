@@ -8,6 +8,7 @@ import android.widget.TextView
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.mingmin.materialdesign.R
+import com.mingmin.materialdesign.firestore.firestore.RatingDoc
 import me.zhanghai.android.materialratingbar.MaterialRatingBar
 import java.text.SimpleDateFormat
 import java.util.*

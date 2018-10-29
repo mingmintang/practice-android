@@ -1,21 +1,25 @@
-package com.mingmin.materialdesign.firestore
+package com.mingmin.materialdesign.firestore.viewmodel
 
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.mingmin.materialdesign.firestore.RatingsAdapter
+import com.mingmin.materialdesign.firestore.firestore.RestaurantDetail
+import com.mingmin.materialdesign.firestore.firestore.RatingDoc
+import com.mingmin.materialdesign.firestore.firestore.RestaurantDoc
 
 class DetailViewModel(val restaurantId: String) {
 
-    val detailModel = DetailModel()
+    val model = RestaurantDetail()
     val doc = ObservableField<RestaurantDoc>()
     var imageUrl = ObservableField<String>()
     val isLoading = ObservableBoolean(false)
     val isEmpty = ObservableBoolean(false)
 
     fun startListener(ratingsAdapter: RatingsAdapter? = null) {
-        detailModel.startListener(restaurantId, object : DetailModel.RestaurantDataReadyListener {
+        model.startListener(restaurantId, object : RestaurantDetail.RestaurantDataReadyListener {
             override fun onDataReady(doc: RestaurantDoc?) {
                 this@DetailViewModel.doc.set(doc)
                 imageUrl.set(doc?.photo)
@@ -25,17 +29,17 @@ class DetailViewModel(val restaurantId: String) {
     }
 
     fun stopListener(ratingsAdapter: RatingsAdapter? = null) {
-        detailModel.stopListener()
+        model.stopListener()
         ratingsAdapter?.stopListening()
     }
 
     fun addNewRating(rating: Double, comment: String): Task<Unit> {
-        return detailModel.addNewRating(restaurantId, rating, comment)
+        return model.addNewRating(restaurantId, rating, comment)
     }
 
     fun createRatingAdapter(): RatingsAdapter {
         val options = FirestoreRecyclerOptions.Builder<RatingDoc>()
-                .setQuery(detailModel.getRestaurantRatingQuery(restaurantId), RatingDoc::class.java)
+                .setQuery(model.getRestaurantRatingQuery(restaurantId), RatingDoc::class.java)
                 .build()
         val ratingsAdapter = object : RatingsAdapter(options) {
             override fun onDataChanged() {

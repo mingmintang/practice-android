@@ -1,4 +1,4 @@
-package com.mingmin.materialdesign.firestore
+package com.mingmin.materialdesign.firestore.viewmodel
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
@@ -10,9 +10,12 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.mingmin.materialdesign.R
+import com.mingmin.materialdesign.firestore.RestaurantsAdapter
+import com.mingmin.materialdesign.firestore.firestore.Restaurants
+import com.mingmin.materialdesign.firestore.firestore.RestaurantDoc
 import java.util.concurrent.Executors
 
-class ViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     class RestaurantsFilter(val categoryId: Int = 0,
                             val cityId: Int = 0,
                             val priceId: Int = 0,
@@ -21,7 +24,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     private val categories = application.resources.getStringArray(R.array.catelogies)
     private val cities = application.resources.getStringArray(R.array.cities)
     private val sortDescriptions = application.resources.getStringArray(R.array.sort_descriptions)
-    private val model = Model()
+    private val model = Restaurants()
     val isLoading = ObservableBoolean(false)
     val isEmpty = ObservableBoolean(true)
     val category = ObservableField<String>("")
@@ -39,7 +42,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-    fun createRestaurantsAdapter(sortBy: String, filter: Model.Filter?, listener: RestaurantsAdapter.ItemClickListener?) {
+    fun createRestaurantsAdapter(sortBy: String, filter: Restaurants.Filter?, listener: RestaurantsAdapter.ItemClickListener?) {
         if (filter == null) {
             restaurantsFilter.set(RestaurantsFilter())
         }
@@ -78,7 +81,7 @@ class ViewModel(application: Application) : AndroidViewModel(application) {
     fun updateRestaurantsAdapter(categoryId: Int, cityId: Int, priceId: Int, sortId: Int,
                                  listener: RestaurantsAdapter.ItemClickListener?) {
         stopListener()
-        val filter = Model.Filter(
+        val filter = Restaurants.Filter(
                 if (categoryId > 0) categories[categoryId] else null,
                 if (cityId > 0) cities[cityId] else null,
                 if (priceId > 0) priceId else null

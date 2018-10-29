@@ -11,21 +11,25 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.firebase.ui.auth.AuthUI
+import com.google.android.gms.auth.api.Auth
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.UserProfileChangeRequest
 import com.mingmin.materialdesign.BuildConfig
 import com.mingmin.materialdesign.R
 import com.mingmin.materialdesign.databinding.ActivityFirestoreBinding
-import com.mingmin.materialdesign.firestore.ViewModel.Companion.DEFAULT_COUNT
+import com.mingmin.materialdesign.firestore.viewmodel.MainViewModel.Companion.DEFAULT_COUNT
+import com.mingmin.materialdesign.firestore.firestore.RestaurantDoc
+import com.mingmin.materialdesign.firestore.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_firestore.*
 
 class FirestoreActivity : AppCompatActivity(), RestaurantsAdapter.ItemClickListener,
         RestaurantsFilterDialog.RestaurantsFilterListener {
-    lateinit var viewModel: ViewModel
+    lateinit var viewModel: MainViewModel
     lateinit var binding: ActivityFirestoreBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_firestore)
         binding.viewModel = viewModel
 

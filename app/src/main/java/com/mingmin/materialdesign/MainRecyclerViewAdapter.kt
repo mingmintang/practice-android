@@ -1,6 +1,8 @@
 package com.mingmin.materialdesign
 
+import android.os.Build
 import android.support.v7.widget.RecyclerView
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,6 +43,10 @@ class MainRecyclerViewAdapter(val demos: ArrayList<Demo>) : RecyclerView.Adapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val demo = demos.get(position)
         holder.title.text = demo.title
-        holder.desc.text = demo.desc
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            holder.desc.text = Html.fromHtml(demo.desc, Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            holder.desc.text = demo.desc
+        }
     }
 }
