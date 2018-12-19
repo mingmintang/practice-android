@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mingmin.materialdesign">
+    package="com.mingmin.practice">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,20 +11,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.mingmin.practice.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".bottomsheet.BottomSheetActivity" />
-        <activity android:name=".transparenttoolbar.TransparentToolbarActivity" />
-        <activity android:name=".ratingbar.RatingBarActivity" />
-        <activity android:name=".firestore.FirestoreActivity" />
-        <activity android:name=".mvvm.MvvmActivity" />
-        <activity android:name=".firestore.FirestoreDetailActivity" />
-        <activity android:name=".retrofit.RetrofitActivity"></activity>
+        <activity android:name="com.mingmin.practice.bottomsheet.BottomSheetActivity" />
+        <activity android:name="com.mingmin.practice.transparenttoolbar.TransparentToolbarActivity" />
+        <activity android:name="com.mingmin.practice.ratingbar.RatingBarActivity" />
+        <activity android:name="com.mingmin.practice.firestore.FirestoreActivity" />
+        <activity android:name="com.mingmin.practice.firestore.FirestoreDetailActivity" />
+        <activity android:name="com.mingmin.practice.retrofit.RetrofitActivity" />
     </application>
 
 </manifest>

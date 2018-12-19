@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaterialDesign</string>
+    <string name="app_name">Practice</string>
     <string name="transitionName_demoTitle">DemoTitle</string>
     <string name="all_restaurants">所有餐廳</string>
     <string name="divider_bullet">•</string>

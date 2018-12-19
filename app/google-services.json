@@ -39,9 +39,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:744939238364:android:10a8c6348a755025",
+        "mobilesdk_app_id": "1:744939238364:android:1c4dd37b5dc63c13",
         "android_client_info": {
-          "package_name": "com.mingmin.materialdesign"
+          "package_name": "com.mingmin.practice.app"
         }
       },
       "oauth_client": [
